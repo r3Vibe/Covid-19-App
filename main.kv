@@ -1,0 +1,114 @@
+<ManageScreen>:
+
+    LoadingScreen:
+
+    MainScreen:
+
+<LoadingScreen>:
+    name:"LoadingScreen"
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding:30
+        spacing:10
+
+        MDLabel:
+            halign: "center"
+            text:"Covid-19 Information"
+            font_style:"H4"
+            theme_text_color: "Primary"
+
+        MDLabel:
+            halign: "right"
+            text:"By Dovahkiin"
+            font_style:"H4"
+            theme_text_color: "Primary"
+        FloatLayout:
+            MDFillRoundFlatIconButton:
+                font_size:20
+                icon:"information"
+                text:"Get Latest Info"
+                pos_hint: {"center_x": .5, "center_y": .5}
+                on_release:
+                    root.calltwo()
+                theme_text_color: "Custom"
+                text_color: 1,1,1,1
+
+<MainScreen>:
+    name:"MainScreen"
+    ti:infected
+    td:death
+    tr:recover
+    BoxLayout:
+        orientation: "vertical"
+
+        MDToolbar:
+            title: "Covid-19 Statistics"
+            left_action_items: [["menu", lambda x: covid.toggle_nav_drawer()]]
+            right_action_items: [["close", lambda x: exit()]]
+            specific_text_color: 1,1,1,1
+
+
+        BoxLayout:
+            orientation: "vertical"
+            padding:20
+
+            BoxLayout:
+                orientation: "horizontal"
+
+                MDLabel:
+                    halign: "center"
+                    text:"Total Infected"
+                    font_style:"H4"
+                    theme_text_color: "Primary"
+
+                MDLabel:
+                    id:infected
+                    halign: "center"
+                    text:"Number"
+                    font_style:"H4"
+                    theme_text_color: "Primary"
+
+            BoxLayout:
+                orientation: "horizontal"
+
+                MDLabel:
+                    halign: "center"
+                    text:"Total Death"
+                    font_style:"H4"
+                    theme_text_color: "Primary"
+
+                MDLabel:
+                    id:death
+                    halign: "center"
+                    text:"Number"
+                    font_style:"H4"
+                    theme_text_color: "Primary"
+
+            BoxLayout:
+                orientation: "horizontal"
+
+                MDLabel:
+                    halign: "center"
+                    text:"Total Recovery"
+                    font_style:"H4"
+                    theme_text_color: "Primary"
+
+                MDLabel:
+                    id:recover
+                    halign: "center"
+                    text:"Number"
+                    font_style:"H4"
+                    theme_text_color: "Primary"
+            
+            MDFloatingActionButton:
+                icon: "refresh"
+                md_bg_color: app.theme_cls.primary_color
+                pos_hint: {"center_x": .5, "center_y": .5}
+                on_release:root.refresh()
+                theme_text_color: "Custom"
+                text_color: 1,1,1,1
+            
+    MDNavigationDrawer:
+        id: covid
+        ContentNavigationDrawer:
+
