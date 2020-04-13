@@ -1,3 +1,7 @@
+#Description: This Script will Scrape website to find the corona virus infected numbers
+#and show the values in a kivy made gui
+
+#===================================imports===================================#
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.clock import Clock
@@ -7,7 +11,10 @@ from bs4 import BeautifulSoup
 from kivy.uix.boxlayout import BoxLayout
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDFlatButton
+#===================================imports===================================#
 
+
+#===================================classes for the screens===================================#
 class ManageScreen(ScreenManager):
     pass
 
@@ -49,9 +56,14 @@ class MainScreen(Screen):
         self.tr.text = str(number[2])       
         # print("Works")
 
+#===================================classes for the screens===================================#
+
+#===================================classe for the navigation drawer===================================#
 class ContentNavigationDrawer(BoxLayout):
     pass
+#===================================classe for the navigation drawer===================================#
         
+#===================================classe for the kivy mainapp===================================#        
 class MainApp(MDApp):
     def build(self):
         self.title = "Covid-19 Cases In India"
@@ -94,9 +106,9 @@ class MainApp(MDApp):
     def conn_error_dismiss(self):
         MainApp.dialog1.dismiss()
         exit()
-        
+#===================================classe for the kivy mainapp===================================#   
 
-
+#==This function scrapes data from internet and returns the valus==#   
 def get_info():
     headers = {'user-agent': 'Mozilla/5.0'}
     url = 'https://www.worldometers.info/coronavirus/country/india/'
@@ -107,8 +119,9 @@ def get_info():
     for numbers in allinfo_numbers:
            number.append(numbers.span.string)
     return number
+#==This function scrapes data from internet and returns the valus==# 
 
-
-
+#==This Will run the MainApp==# 
 if __name__ == "__main__":
     MainApp().run()
+#==This Will run the MainApp==# 
