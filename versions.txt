@@ -1,0 +1,5 @@
+version 0.7 started working properly on Android
+
+version 0.8 added some fixex
+
+version 0.9 coming soon
