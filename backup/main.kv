@@ -1,0 +1,260 @@
+<ManageScreen>:
+    LoadingScreen:
+    MainScreen:
+    ClosedCaseScreen:
+<LoadingScreen>:
+    name:"LoadingScreen"
+    BoxLayout:
+        orientation: 'vertical'
+        padding:30
+        spacing:10
+        MDLabel:
+            halign: "center"
+            text:"Covid-19 Information"
+            font_style:"H4"
+            theme_text_color: "Primary"
+        MDLabel:
+            halign: "right"
+            text:"By Dovahkiin"
+            font_style:"H4"
+            theme_text_color: "Primary"
+        FloatLayout:
+            MDFillRoundFlatIconButton:
+                font_size:20
+                icon:"information"
+                text:"Get Latest Info"
+                pos_hint: {"center_x": .5, "center_y": .5}
+                on_release:
+                    root.loadscreen()
+                theme_text_color: "Custom"
+                text_color: 1,1,1,1
+                
+<MainScreen>:
+    name:"MainScreen"
+    covid:covid
+    ti:infected
+    td:death
+    tr:recover
+    BoxLayout:
+        orientation: "vertical"
+        MDToolbar:
+            title: "Covid-19 Statistics"
+            left_action_items: [["menu", lambda x: covid.set_state("open")]]
+            right_action_items: [["close", lambda x: exit()]]
+            specific_text_color: 1,1,1,1
+            pos_hint: {"top": 1}
+            elevation: 10
+        BoxLayout:
+            orientation: "vertical"
+            padding:20
+            BoxLayout:
+                orientation: "horizontal"
+                MDLabel:
+                    halign:"center"
+                    text:"All Cases"
+                    font_style:"H4"
+                    theme_text_color: "Primary"
+            BoxLayout:
+                orientation: "horizontal"
+                MDLabel:
+                    halign: "center"
+                    text:"Total Infected"
+                    font_style:"H4"
+                    theme_text_color: "Primary"
+                MDLabel:
+                    id:infected
+                    halign: "center"
+                    text:"Number"
+                    font_style:"H4"
+                    theme_text_color: "Primary"
+            BoxLayout:
+                orientation: "horizontal"
+                MDLabel:
+                    halign: "center"
+                    text:"Active Cases"
+                    font_style:"H4"
+                    theme_text_color: "Primary"
+                MDLabel:
+                    id:death
+                    halign: "center"
+                    text:"Number"
+                    font_style:"H4"
+                    theme_text_color: "Primary"
+            BoxLayout:
+                orientation: "horizontal"
+                MDLabel:
+                    halign: "center"
+                    text:"Closed Cases"
+                    font_style:"H4"
+                    theme_text_color: "Primary"
+                MDLabel:
+                    id:recover
+                    halign: "center"
+                    text:"Number"
+                    font_style:"H4"
+                    theme_text_color: "Primary"
+            MDFloatingActionButton:
+                icon: "refresh"
+                md_bg_color: app.theme_cls.primary_color
+                pos_hint: {"center_x": .5, "center_y": .5}
+                on_release:
+                    root.refresh()
+
+    MDNavigationDrawer:
+        id: covid
+        ContentNavigationDrawer:
+            orientation:"vertical"
+            padding:"8dp"
+            spacing:"8dp"
+            ScrollView:
+                MDList:
+                    OneLineListItem:
+                        text: "All Cases"
+                        on_release:
+                            root.covid.set_state("close")
+                            root.go_to_main()
+                    OneLineListItem:
+                        text: "Closed Cases"
+                        on_release:
+                            root.covid.set_state("close")
+                            root.go_to_close()
+
+<ClosedCaseScreen>:
+
+    name:"ClosedCaseScreen"
+    covid:covid
+    tcn:tcn
+    tdn:tdn
+    trn:trn
+    drn:drn
+    rrn:rrn
+    BoxLayout:
+        orientation: "vertical"
+        MDToolbar:
+            title: "Covid-19 Statistics"
+            left_action_items: [["menu", lambda x: covid.set_state("open")]]
+            right_action_items: [["close", lambda x: exit()]]
+            specific_text_color: 1,1,1,1
+            pos_hint: {"top": 1}
+            elevation: 10
+
+        BoxLayout:
+            orientation: "vertical"
+            padding:20
+
+            BoxLayout:
+                orientation: "horizontal"
+                MDLabel:
+                    halign:"center"
+                    text:"Closed Cases"
+                    font_style:"H4"
+                    theme_text_color: "Primary"
+
+            BoxLayout:
+                orientation: "horizontal"
+                MDLabel:
+                    halign: "center"
+                    text:"Total Closed"
+                    font_style:"H4"
+                    theme_text_color: "Primary"
+                MDLabel:
+                    id:tcn
+                    halign: "center"
+                    text:"Number"
+                    font_style:"H4"
+                    theme_text_color: "Primary"
+
+            BoxLayout:
+                orientation: "horizontal"
+                MDLabel:
+                    halign: "center"
+                    text:"Total Death"
+                    font_style:"H4"
+                    theme_text_color: "Primary"
+                MDLabel:
+                    id:tdn
+                    halign: "center"
+                    text:"Number"
+                    font_style:"H4"
+                    theme_text_color: "Primary"
+
+            BoxLayout:
+                orientation: "horizontal"
+                MDLabel:
+                    halign: "center"
+                    text:"Total Recovery"
+                    font_style:"H4"
+                    theme_text_color: "Primary"
+                MDLabel:
+                    id:trn
+                    halign: "center"
+                    text:"Number"
+                    font_style:"H4"
+                    theme_text_color: "Primary"
+
+            BoxLayout:
+                orientation: "vertical"
+                BoxLayout:
+                    orientation: "horizontal"
+                    MDLabel:
+                        halign: "center"
+                        text:"Death Ratio"
+                        font_style:"H4"
+                        theme_text_color: "Primary"
+                    MDLabel:
+                        halign: "center"
+                        text:"Recovery Ratio"
+                        font_style:"H4"
+                        theme_text_color: "Primary"
+                BoxLayout:
+                    orientation: "horizontal"
+                    MDLabel:
+                        id:drn
+                        halign: "center"
+                        text:"no"
+                        font_style:"H4"
+                        theme_text_color: "Primary"
+                    MDLabel:
+                        id:rrn
+                        halign: "center"
+                        text:"no"
+                        font_style:"H4"
+                        theme_text_color: "Primary"
+               
+
+    MDNavigationDrawer:
+        id: covid
+        ContentNavigationDrawer:
+            orientation:"vertical"
+            padding:"8dp"
+            spacing:"8dp"
+            ScrollView:
+                MDList:
+                    OneLineListItem:
+                        text: "All Cases"
+                        on_release:
+                            root.covid.set_state("close")
+                            root.go_to_main()
+                    OneLineListItem:
+                        text: "Closed Cases"
+                        on_release:
+                            root.covid.set_state("close")
+                            root.go_to_close()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
